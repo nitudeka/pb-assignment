@@ -1,6 +1,9 @@
 import { useFormik } from "formik";
+import { useState } from "react";
+import { getUUID } from "../utils/common";
 
 const useNewCard = () => {
+  const [loading, setLoading] = useState(false);
   const formik = useFormik({
     initialValues: {
       cardNumber: "",
@@ -10,8 +13,29 @@ const useNewCard = () => {
     },
     validate,
     validateOnChange: false,
-    onSubmit: (values) => { },
+    onSubmit,
   });
+
+  async function onSubmit(values) {
+    try {
+      const res = await fetch("/api/cards", {
+        method: "POST",
+        headers: { uuid: getUUID(), "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...values,
+          cardNumber: values.cardNumber.replaceAll(" ", ""),
+        }),
+      });
+      const data = await res.json();
+
+      if (res.status === 400) {
+        formik.setFieldError("cardNumber", data.message);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    setLoading(false);
+  }
 
   function validate(values) {
     const errors = {};
@@ -25,7 +49,7 @@ const useNewCard = () => {
       errors.expiryDate = "Expiry date required";
     } else {
       const month = parseInt(values.expiryDate.substr(0, 2), 10);
-      const year = parseInt(values.expiryDate.substr(2, 2), 10);
+      const year = parseInt(values.expiryDate.substr(5, 2), 10);
       const currentYear = new Date().getFullYear() % 100;
 
       const isValid =
@@ -33,6 +57,7 @@ const useNewCard = () => {
         month <= 12 &&
         year >= currentYear &&
         year <= currentYear + 20;
+
       if (!isValid) errors.expiryDate = "Invalid expiry date";
     }
     if (values.cvv.length !== 3) errors.cvv = "CVV is required";
@@ -81,6 +106,7 @@ const useNewCard = () => {
     handleName,
     onSubmit: formik.handleSubmit,
     errors: formik.errors,
+    loading,
   };
 };
 
