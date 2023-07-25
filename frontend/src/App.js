@@ -1,9 +1,8 @@
 import { Outlet } from "react-router-dom";
-import "./App.css";
 
 function App() {
   return (
-    <div className="container">
+    <div className="h-screen w-screen flex items-center justify-center">
       <Outlet />
     </div>
   );
