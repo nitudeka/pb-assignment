@@ -1,9 +1,11 @@
-import { useFormik } from "formik";
 import { useState } from "react";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { getUUID } from "../utils/common";
 
 const useNewCard = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       cardNumber: "",
@@ -28,13 +30,16 @@ const useNewCard = () => {
       });
       const data = await res.json();
 
-      if (res.status === 400) {
+      if (res.ok) {
+        navigate("/");
+      } else {
         formik.setFieldError("cardNumber", data.message);
+        setLoading(false);
       }
     } catch (e) {
+      setLoading(false);
       console.log(e);
     }
-    setLoading(false);
   }
 
   function validate(values) {
