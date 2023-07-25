@@ -68,7 +68,7 @@ const CardNew = () => {
             error={errors.name}
           />
         </div>
-        <Button text="Add card" />
+        <Button type="submit" text="Add card" />
       </form>
     </div>
   );

@@ -12,7 +12,10 @@ const Input = (props) => {
       </label>
       <input
         onChange={({ target: { value } }) => onChange(value)}
-        className="focus:border-gray-700 pr-11 appearance-none border rounded-lg w-full p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm"
+        className={[
+          error ? "border-red-500" : "focus:border-gray-700",
+          "pr-11 border appearance-none rounded-lg w-full p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm",
+        ].join(" ")}
         id={name}
         value={value}
         type={type || "text"}
