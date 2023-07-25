@@ -1,5 +1,6 @@
 const Input = (props) => {
-  const { onChange, value, label, name, placeholder, icon, type } = props;
+  const { error, onChange, value, label, name, placeholder, icon, type } =
+    props;
 
   return (
     <div className="mt-4 relative">
@@ -18,6 +19,9 @@ const Input = (props) => {
         placeholder={placeholder}
       />
       {icon && <img src={icon} className="absolute z-10 h-6 right-3 top-2.5" />}
+      {error && (
+        <span className="text-xs text-red-500 ml-3 block -mt-.5">{error}</span>
+      )}
     </div>
   );
 };

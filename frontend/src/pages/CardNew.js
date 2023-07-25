@@ -16,6 +16,8 @@ const CardNew = () => {
     handleCvv,
     name,
     handleName,
+    onSubmit,
+    errors,
   } = useNewCard();
 
   return (
@@ -23,45 +25,51 @@ const CardNew = () => {
       <h2 className="font-bold text-gray-700 border-b border-gray-200 pb-3">
         Add new card
       </h2>
-      <div className="mb-4">
-        <Input
-          value={cardNumber}
-          onChange={handleNumChange}
-          label="Card number"
-          placeholder="0000 0000 0000 0000"
-          icon={ImgCard}
-          name="cardNumber"
-        />
-        <div className="flex">
+      <form onSubmit={onSubmit}>
+        <div className="mb-4">
           <Input
-            value={expiryDate}
-            onChange={handleExpiry}
-            name="expiryDate"
-            label="Expiry date"
-            placeholder="MM / YY"
-            icon={ImgCalendar}
+            value={cardNumber}
+            onChange={handleNumChange}
+            label="Card number"
+            placeholder="0000 0000 0000 0000"
+            icon={ImgCard}
+            name="cardNumber"
+            error={errors.cardNumber}
           />
-          <div className="p-2" />
+          <div className="flex">
+            <Input
+              value={expiryDate}
+              onChange={handleExpiry}
+              name="expiryDate"
+              label="Expiry date"
+              placeholder="MM / YY"
+              icon={ImgCalendar}
+              error={errors.expiryDate}
+            />
+            <div className="p-2" />
+            <Input
+              value={cvv}
+              onChange={handleCvv}
+              name="cvv"
+              label="CVV"
+              placeholder="&#8226; &#8226; &#8226;"
+              icon={ImgI}
+              type="password"
+              error={errors.cvv}
+            />
+          </div>
           <Input
-            value={cvv}
-            onChange={handleCvv}
-            name="cvv"
-            label="CVV"
-            placeholder="&#8226; &#8226; &#8226;"
-            icon={ImgI}
-            type="password"
+            value={name}
+            onChange={handleName}
+            name="name"
+            label="Cardholder name"
+            placeholder="Enter cardholder's full name"
+            icon={ImgUser}
+            error={errors.name}
           />
         </div>
-        <Input
-          value={name}
-          onChange={handleName}
-          name="name"
-          label="Cardholder name"
-          placeholder="Enter cardholder's full name"
-          icon={ImgUser}
-        />
-      </div>
-      <Button text="Add card" />
+        <Button text="Add card" />
+      </form>
     </div>
   );
 };
