@@ -9,7 +9,10 @@ export const createUUID = () => {
 
 export const getUUID = () => {
   let uuid = localStorage.getItem("uuid");
-  if (!uuid) uuid = createUUID();
+  if (!uuid) {
+    uuid = createUUID();
+    localStorage.setItem("uuid", uuid);
+  }
 
   return uuid;
 };
