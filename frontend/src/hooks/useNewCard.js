@@ -1,11 +1,6 @@
 import { useFormik } from "formik";
-import { useState } from "react";
 
 const useNewCard = () => {
-  const [cardNumber, setCardNumber] = useState("");
-  const [expiryDate, setExpiryDate] = useState("");
-  const [cvv, setCvv] = useState("");
-  const [name, setName] = useState("");
   const formik = useFormik({
     initialValues: {
       cardNumber: "",
