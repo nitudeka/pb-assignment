@@ -2,7 +2,8 @@
 
 Install `docker` and `docker-compose`
 
-Please follow this [link](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/How-to-install-Docker-and-docker-compose-on-Ubuntu) if not already installed
+Please follow this [link](https://docs.docker.com/engine/install/ubuntu/) to install docker
+And this [link](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04) to install docker-compose
 
 `cd` into the root folder, then run `docker-compose up --build`
 
