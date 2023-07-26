@@ -2,7 +2,7 @@ import ImgCard from "../../assets/png/chip.png";
 
 const Card = (props) => {
   return (
-    <div className="relative bg-gradient-to-r from-gray-600 to-gray-900 text-gray-100 w-96 shadow-md p-5 rounded-xl bg-white rounded-lg flex flex-col justify-between">
+    <div className="relative mb-4 bg-gradient-to-r from-gray-600 to-gray-900 text-gray-100 w-96 shadow-md p-5 rounded-xl bg-white rounded-lg flex flex-col justify-between">
       <img
         src={ImgCard}
         alt="chip"
