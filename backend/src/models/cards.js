@@ -5,6 +5,7 @@ const cardSchema = new mongoose.Schema({
   expiryDate: { type: String, required: true },
   cvv: { type: String, required: true },
   name: { type: String, required: true },
+  userId: { type: String, required: true },
 });
 
 const CardModel = mongoose.model("Card", cardSchema);
